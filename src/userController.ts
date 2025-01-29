@@ -18,7 +18,7 @@ export default class UserController {
             res.status(404).json({ message: "User not found" });
             return;
         }
-        res.status(200).json({ id: user.id, name: user.name, email: user.email, create_at: user.createAt, team: user.team, posts: user.posts });
+        res.status(200).json({ id: user.id, name: user.name, email: user.email, create_at: user.createAt, team: { id: user.team.id, name: user.team.name }, posts: user.posts.map(post => ({ id: post.id, title: post.title, content: post.content })) });
     }
 
     async createUser(req: Request, res: Response) {
