@@ -4,6 +4,7 @@ import userRouter from "./userRouter";
 import UserService from "./userService";
 import { User } from "./entities/user";
 import { DeepPartial } from "typeorm";
+import { Team } from "./entities/team";
 
 const app = express();
 const service = new UserService();
@@ -20,6 +21,11 @@ app.listen(port, host, async () => {
     } catch(error) {
         console.log(error);
         process.exit(1);
+    }
+
+    const repository = AppDataSource.getRepository(Team);
+    for(let i = 0; i < 15000; i++) {
+        await repository.insert({ name: `team_${ i }` });
     }
 
     for(let i = 0; i < 10000; i++) {
