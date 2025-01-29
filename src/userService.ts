@@ -7,9 +7,19 @@ export default class UserService {
 
     async getUser(id: number) {
         const user = await this.repository.createQueryBuilder("user")
-            .addSelect(["user.id", "user.name", "user.email", "user.createAt"])
-            .leftJoinAndSelect("user.team", "team")
-            .leftJoinAndSelect("user.posts", "posts")
+            .select([
+                "user.id",
+                "user.name",
+                "user.email",
+                "user.createAt",
+                "team.id as team_id",
+                "team.name as team_name",
+                "post.id as post_id",
+                "post.title",
+                "post.content",
+            ])
+            .leftJoin("user.team", "team")
+            .leftJoin("user.posts", "posts")
             .where("user.id = :id", { id: id })
             .getOne();
         return user;
