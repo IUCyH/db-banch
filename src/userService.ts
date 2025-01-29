@@ -20,6 +20,7 @@ export default class UserService {
             ])
             .leftJoin("user.team", "team")
             .leftJoin("user.posts", "post")
+            .addSelect([])
             .where("user.id = :id", { id: id })
             .getOne();
         return user;
