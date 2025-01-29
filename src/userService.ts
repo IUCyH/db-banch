@@ -14,7 +14,6 @@ export default class UserService {
                 "user.createAt",
                 "team.id as team_id",
                 "team.name as team_name",
-                "post.id as post_id",
                 "post.title",
                 "post.content",
             ])
