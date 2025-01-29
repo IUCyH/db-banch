@@ -6,11 +6,12 @@ export default class UserService {
     private repository = AppDataSource.getRepository(User);
 
     async getUser(id: number) {
-        const user = await this.repository.findOne({
-            where: { id: id },
-            select: ["id", "name", "email", "createAt"],
-            relations: ["team", "posts"]
-        });
+        const user = await this.repository.createQueryBuilder("user")
+            .addSelect(["user.id", "user.name", "user.email", "user.createAt"])
+            .leftJoinAndSelect("user.team", "team")
+            .leftJoinAndSelect("user.posts", "posts")
+            .where("user.id = :id", { id: id })
+            .getOne();
         return user;
     }
     
