@@ -24,11 +24,11 @@ app.listen(port, host, async () => {
         process.exit(1);
     }
 
-    const repository = AppDataSource.getRepository(Post);
-    for(let i = 0; i < 20000; i++) {
-        const userId = Math.floor(Math.random() * 9999) + 1;
-        await repository.insert({ title: `post_${ i }`, content: "abc", userId: userId });
-    }
+    // const repository = AppDataSource.getRepository(Post);
+    // for(let i = 0; i < 20000; i++) {
+    //     const userId = Math.floor(Math.random() * 9999) + 1;
+    //     await repository.insert({ title: `post_${ i }`, content: "abc", userId: userId });
+    // }
 
     // const repository = AppDataSource.getRepository(Team);
     // for(let i = 0; i < 15000; i++) {
