@@ -29,7 +29,8 @@ app.listen(port, host, async () => {
     }
 
     for(let i = 0; i < 10000; i++) {
-        const user: DeepPartial<User> = { name: `user_${ i }`, password: "abc1234", email: "abc@abc.com" };
+        const teamId = Math.floor(Math.random() * 15000);
+        const user: DeepPartial<User> = { name: `user_${ i }`, password: "abc1234", email: "abc@abc.com", teamId: teamId };
         await service.createUser(user);
     }
 });
