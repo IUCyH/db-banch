@@ -26,7 +26,7 @@ app.listen(port, host, async () => {
 
     const repository = AppDataSource.getRepository(Post);
     for(let i = 0; i < 20000; i++) {
-        const userId = Math.floor(Math.random() * 10000);
+        const userId = Math.floor(Math.random() * 9999) + 1;
         await repository.insert({ title: `post_${ i }`, content: "abc", userId: userId });
     }
 
