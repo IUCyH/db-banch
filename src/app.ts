@@ -1,4 +1,5 @@
 import express from "express";
+import { AppDataSource } from "./configs/orm";
 import userRouter from "./userRouter";
 import UserService from "./userService";
 import { User } from "./entities/user";
@@ -12,10 +13,17 @@ app.use("/users", userRouter);
 const port = 8080;
 const host = "0.0.0.0";
 app.listen(port, host, async () => {
-  console.log(`Server listening on ${ host }:${ port }`);
+    console.log(`Server listening on ${ host }:${ port }`);
 
-  for(let i = 0; i < 10000; i++) {
-    const user: DeepPartial<User> = { name: `user_${ i }`, password: "abc1234", email: "abc@abc.com" };
-    await service.createUser(user);
-  }
+    try {
+        await AppDataSource.initialize();
+    } catch(error) {
+        console.log(error);
+        process.exit(1);
+    }
+
+    for(let i = 0; i < 10000; i++) {
+        const user: DeepPartial<User> = { name: `user_${ i }`, password: "abc1234", email: "abc@abc.com" };
+        await service.createUser(user);
+    }
 });
