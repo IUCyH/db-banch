@@ -24,20 +24,20 @@ app.listen(port, host, async () => {
         process.exit(1);
     }
 
-    const postRepository = AppDataSource.getRepository(Post);
-    for(let i = 0; i < 1000000; i++) {
-        const userId = Math.floor(Math.random() * 999999) + 1;
-        await postRepository.insert({ title: `post_${ i }`, content: "abc", userId: userId });
-    }
-
-    const teamRepository = AppDataSource.getRepository(Team);
-    for(let i = 0; i < 100000; i++) {
-        await teamRepository.insert({ name: `team_${ i }` });
-    }
-
-    for(let i = 0; i < 1000000; i++) {
-        const teamId = Math.floor(Math.random() * 99999) + 1;
-        const user: DeepPartial<User> = { name: `user_${ i }`, password: "abc1234", email: "abc@abc.com", teamId: teamId };
-        await service.createUser(user);
-    }
+    // const postRepository = AppDataSource.getRepository(Post);
+    // for(let i = 0; i < 1000000; i++) {
+    //     const userId = Math.floor(Math.random() * 999999) + 1;
+    //     await postRepository.insert({ title: `post_${ i }`, content: "abc", userId: userId });
+    // }
+    //
+    // const teamRepository = AppDataSource.getRepository(Team);
+    // for(let i = 0; i < 100000; i++) {
+    //     await teamRepository.insert({ name: `team_${ i }` });
+    // }
+    //
+    // for(let i = 0; i < 1000000; i++) {
+    //     const teamId = Math.floor(Math.random() * 99999) + 1;
+    //     const user: DeepPartial<User> = { name: `user_${ i }`, password: "abc1234", email: "abc@abc.com", teamId: teamId };
+    //     await service.createUser(user);
+    // }
 });
