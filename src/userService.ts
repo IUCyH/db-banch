@@ -9,7 +9,7 @@ export default class UserService {
         const user = await this.repository.findOne({
             where: { id: id },
             select: ["id", "name", "email", "createAt"],
-            relations: ["team"]
+            relations: ["team", "post"]
         });
         return user;
     }

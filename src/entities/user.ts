@@ -2,9 +2,11 @@ import {
     Entity,
     PrimaryGeneratedColumn,
     Column,
-    ManyToOne
+    ManyToOne,
+    OneToMany
 } from "typeorm";
 import { Team } from "./team";
+import { Post } from "./post";
 
 @Entity()
 export class User {
@@ -28,4 +30,7 @@ export class User {
 
     @ManyToOne(() => Team, team => team.users)
     team!: Team;
+
+    @OneToMany(() => Post, post => post.user)
+    posts!: Post[];
 }

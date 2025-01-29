@@ -5,6 +5,7 @@ import UserService from "./userService";
 import { User } from "./entities/user";
 import { DeepPartial } from "typeorm";
 import { Team } from "./entities/team";
+import { Post } from "./entities/post";
 
 const app = express();
 const service = new UserService();
@@ -21,6 +22,12 @@ app.listen(port, host, async () => {
     } catch(error) {
         console.log(error);
         process.exit(1);
+    }
+
+    const repository = AppDataSource.getRepository(Post);
+    for(let i = 0; i < 20000; i++) {
+        const userId = Math.floor(Math.random() * 10000);
+        await repository.insert({ title: `post_${ i }`, content: "abc", userId: userId });
     }
 
     // const repository = AppDataSource.getRepository(Team);
