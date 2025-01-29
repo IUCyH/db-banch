@@ -23,14 +23,14 @@ app.listen(port, host, async () => {
         process.exit(1);
     }
 
-    const repository = AppDataSource.getRepository(Team);
-    for(let i = 0; i < 15000; i++) {
-        await repository.insert({ name: `team_${ i }` });
-    }
-
-    for(let i = 0; i < 10000; i++) {
-        const teamId = Math.floor(Math.random() * 15000);
-        const user: DeepPartial<User> = { name: `user_${ i }`, password: "abc1234", email: "abc@abc.com", teamId: teamId };
-        await service.createUser(user);
-    }
+    // const repository = AppDataSource.getRepository(Team);
+    // for(let i = 0; i < 15000; i++) {
+    //     await repository.insert({ name: `team_${ i }` });
+    // }
+    //
+    // for(let i = 0; i < 10000; i++) {
+    //     const teamId = Math.floor(Math.random() * 15000);
+    //     const user: DeepPartial<User> = { name: `user_${ i }`, password: "abc1234", email: "abc@abc.com", teamId: teamId };
+    //     await service.createUser(user);
+    // }
 });
