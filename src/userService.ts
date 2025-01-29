@@ -6,7 +6,6 @@ export default class UserService {
     private repository = AppDataSource.getRepository(User);
 
     async getUser(id: number) {
-
         const user = await this.repository.findOne({
             where: { id: id },
             select: ["id", "name", "email", "createAt"],
