@@ -1,13 +1,15 @@
-import { Logger, QueryRunner } from "typeorm";
+import { Logger } from "typeorm";
 import { performance } from "perf_hooks";
 
 export class CustomLogger implements Logger {
-    logQuery(query: string, parameters?: any[], queryRunner?: QueryRunner) {
+    logQuery(query: string, parameters?: any[]) {
         const start = performance.now();
 
-        queryRunner?.query(query, parameters).then(() => {
+        console.log(`[QUERY START] ${query}`);
+
+        setImmediate(() => {
             const end = performance.now();
-            console.log(`[QUERY] ${query}`);
+            console.log(`[QUERY END] ${query}`);
             console.log(`[EXECUTION TIME] ${(end - start).toFixed(3)} ms`);
         });
     }
