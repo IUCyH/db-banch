@@ -1,8 +1,13 @@
 import { Request, Response } from "express";
 import PostService from "./postService";
+import autoBind from "../autoBind";
 
 export default class PostController {
     private service = new PostService();
+
+    constructor() {
+        autoBind(this);
+    }
 
     async getPosts(req: Request, res: Response) {
         let { date } = req.query;
