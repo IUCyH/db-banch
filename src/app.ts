@@ -1,12 +1,21 @@
 import express from "express";
 import userRouter from "./userRouter";
+import UserService from "./userService";
+import { User } from "./entities/user";
+import { DeepPartial } from "typeorm";
 
 const app = express();
+const service = new UserService();
 
 app.use("/users", userRouter);
 
 const port = 8080;
 const host = "0.0.0.0";
-app.listen(port, host, () => {
-  console.log(`Server listening on ${host}:${port}`);
+app.listen(port, host, async () => {
+  console.log(`Server listening on ${ host }:${ port }`);
+
+  for(let i = 0; i < 10000; i++) {
+    const user: DeepPartial<User> = { name: `user_${ i }`, password: "abc1234", email: "abc@abc.com" };
+    await service.createUser(user);
+  }
 });

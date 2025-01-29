@@ -15,4 +15,16 @@ export default class UserController {
         }
         res.status(200).json(user);
     }
+
+    async createUser(req: Request, res: Response) {
+        const user = req.body;
+
+        try {
+            const result = await this.service.createUser(user);
+            res.status(201).json(result);
+        } catch {
+            res.status(500).json({ message: "Error creating user" });
+            return;
+        }
+    }
 }
