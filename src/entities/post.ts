@@ -14,7 +14,7 @@ export class Post {
     @Column("varchar", { length: 64 })
     title: string = "";
 
-    @Column("text")
+    @Column("varchar", { length: 512 })
     content: string = "";
 
     @Column("int")
