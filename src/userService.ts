@@ -11,15 +11,12 @@ export default class UserService {
                 "user.id",
                 "user.name",
                 "user.email",
-                "user.createAt",
-                "team.id as team_id",
-                "team.name as team_name",
-                "post.id as post_id",
-                "post.title",
-                "post.content",
+                "user.createAt"
             ])
             .leftJoin("user.team", "team")
+            .addSelect(["team.id", "team.name"])
             .leftJoin("user.posts", "post")
+            .addSelect(["post.id", "post.title", "post.content"])
             .where("user.id = :id", { id: id })
             .getOne();
         return user;
