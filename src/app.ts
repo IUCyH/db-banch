@@ -26,7 +26,7 @@ app.listen(port, host, async () => {
 
     const postRepository = AppDataSource.getRepository(Post);
     for(let i = 0; i < 1000000; i++) {
-        const userId = Math.floor(Math.random() * 9999) + 1;
+        const userId = Math.floor(Math.random() * 999999) + 1;
         await postRepository.insert({ title: `post_${ i }`, content: "abc", userId: userId });
     }
 
@@ -36,7 +36,7 @@ app.listen(port, host, async () => {
     }
 
     for(let i = 0; i < 1000000; i++) {
-        const teamId = Math.floor(Math.random() * 15000);
+        const teamId = Math.floor(Math.random() * 99999) + 1;
         const user: DeepPartial<User> = { name: `user_${ i }`, password: "abc1234", email: "abc@abc.com", teamId: teamId };
         await service.createUser(user);
     }
