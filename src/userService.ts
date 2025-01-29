@@ -19,7 +19,7 @@ export default class UserService {
                 "post.content",
             ])
             .leftJoin("user.team", "team")
-            .leftJoin("user.posts", "posts")
+            .leftJoin("user.posts", "post")
             .where("user.id = :id", { id: id })
             .getOne();
         return user;
