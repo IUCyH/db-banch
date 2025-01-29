@@ -1,6 +1,7 @@
 import express from "express";
 import { AppDataSource } from "./configs/orm";
 import userRouter from "./userRouter";
+import postRouter from "./posts/postRouter";
 import UserService from "./userService";
 import { User } from "./entities/user";
 import { DeepPartial } from "typeorm";
@@ -11,6 +12,7 @@ const app = express();
 const service = new UserService();
 
 app.use("/users", userRouter);
+app.use("/posts", postRouter);
 
 const port = 8080;
 const host = "0.0.0.0";
