@@ -9,7 +9,7 @@ export const AppDataSource = new DataSource({
     password: "abc1234",
     database: "bench",
     synchronize: false,
-    logging: true,
+    logging: ["query"],
     namingStrategy: new SnakeNamingStrategy(),
     extra: {
         timezone: "Asia/Seoul",
